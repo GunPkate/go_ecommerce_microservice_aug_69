@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"go_ecommerce_aug69/core"
+	"log"
+)
 
 func main() {
-	fmt.Println("test")
+	db, err := core.NewDatabase()
+	if err != nil {
+		log.Fatalf("error database: %v", err)
+	}
+	defer db.Close()
+	log.Println("successfully connected")
 }
