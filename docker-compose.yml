@@ -1,16 +1,12 @@
+version: "4"
 services:
-  db:
-    image: postgres:17-alpine
+  mysql:
+    image: mysql:8.3.0
     container_name: go_ecommerce_aug69
-    restart: always
     environment:
-      POSTGRES_USER: gp
-      POSTGRES_PASSWORD: gp
-      POSTGRES_DB: go_ecommerce_aug69
+      MYSQL_ROOT_PASSWORD: gp01
     ports:
-      - "5532:5432"
+      - 3406:3306
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+      - ./mysql:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql

@@ -1,0 +1,19 @@
+# Docker & Database local data
+mysql_data/
+mysql/
+/mysql/
+mysql/**
+.env
+
+# Go Binaries and architectures
+/dist/
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+__debug_bin
+
+# Dependency directories
+/vendor/
