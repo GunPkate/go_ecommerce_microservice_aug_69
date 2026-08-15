@@ -12,6 +12,6 @@ type Product struct {
 	NumReviews   int64      `json:"num_reviews" db:"num_reviews"`
 	Price        float64    `json:"price" db:"price"`
 	CountInStock int64      `json:"count_in_stock" db:"count_in_stock"`
-	CreatedAt    time.Time  `json:"createdAt" db:"createdAt"`
-	UpdatedAt    *time.Time `json:"updatedAt" db:"updatedAt"`
+	CreatedAt    time.Time  `json:"createdAt" db:"created_at"`
+	UpdatedAt    *time.Time `json:"updatedAt" db:"updated_at"`
 }

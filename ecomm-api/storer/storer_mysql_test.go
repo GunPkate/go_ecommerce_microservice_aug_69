@@ -45,3 +45,39 @@ func TestCreateProduct(t *testing.T) {
 	require.NoError(t, err)
 
 }
+
+func TestGetProduct(t *testing.T) {
+	mockDB, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
+	if err != nil {
+		t.Fatalf("Test GetProduct Error %v", err)
+	}
+
+	defer mockDB.Close()
+
+	db := sqlx.NewDb(mockDB, "sqlmock")
+	st := NewSQLStorer(db)
+
+	p := &Product{
+		Name:         "test Product",
+		Image:        "test.jpg",
+		Category:     "test Category",
+		Description:  "test Description",
+		Rating:       5,
+		NumReviews:   10,
+		Price:        100.00,
+		CountInStock: 5,
+	}
+
+	rows := sqlmock.NewRows([]string{"id", "name", "image", "category", "description", "rating", "num_reviews", "price", "count_in_stock", "created_at", "updated_at"}).
+		AddRow(1, p.Name, p.Image, p.Category, p.Description, p.Rating, p.NumReviews, p.Price, p.CountInStock, p.CreatedAt, p.UpdatedAt)
+
+	mock.ExpectQuery("SELECT * FROM products WHERE id =?").
+		WithArgs(1).
+		WillReturnRows(rows)
+	gp, err := st.GetProduct(context.Background(), 1)
+	require.NoError(t, err)
+	require.Equal(t, int64(1), gp.ID)
+
+	err = mock.ExpectationsWereMet()
+	require.NoError(t, err)
+}
