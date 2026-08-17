@@ -15,3 +15,24 @@ type Product struct {
 	CreatedAt    time.Time  `json:"createdAt" db:"created_at"`
 	UpdatedAt    *time.Time `json:"updatedAt" db:"updated_at"`
 }
+
+type Order struct {
+	ID            int64      `json:"id" db:"id"`
+	PaymentMethod string     `json:"payment_method" db:"payment_method"`
+	TaxPrice      float64    `json:"tax_price" db:"tax_price"`
+	ShippingPrice float64    `json:"shipping_price" db:"shipping_price"`
+	TotalPrice    float64    `json:"total_price" db:"total_price"`
+	CreatedAt     time.Time  `json:"createdAt" db:"created_at"`
+	UpdatedAt     *time.Time `json:"updatedAt" db:"updated_at"`
+	Items         []OrderItem
+}
+
+type OrderItem struct {
+	ID        int64   `json:"id" db:"id"`
+	Name      string  `json:"name" db:"name"`
+	Quantity  int64   `json:"quantity" db:"quantity"`
+	Image     string  `json:"image" db:"image"`
+	Price     float64 `json:"price" db:"price"`
+	ProductID int64   `json:"product_id" db:"product_id"`
+	OrderID   int64   `json:"order_id" db:"order_id"`
+}
