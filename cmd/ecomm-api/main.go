@@ -2,6 +2,8 @@ package main
 
 import (
 	"go_ecommerce_aug69/core"
+	"go_ecommerce_aug69/ecomm-api/server"
+	"go_ecommerce_aug69/ecomm-api/storer"
 	"log"
 )
 
@@ -12,4 +14,8 @@ func main() {
 	}
 	defer db.Close()
 	log.Println("successfully connected")
+
+	st := storer.NewSQLStorer(db.GetDB())
+	_ = server.NewServer(st)
+hdl:
 }
