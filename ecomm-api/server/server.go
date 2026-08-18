@@ -30,3 +30,7 @@ func (s *Server) ListProducts(ctx context.Context) ([]storer.Product, error) {
 func (s *Server) UpdateProduct(ctx context.Context, p *storer.Product) (*storer.Product, error) {
 	return s.storer.UpdateProducts(ctx, p)
 }
+
+func (s *Server) DeleteProduct(ctx context.Context, id int64) error {
+	return s.storer.DeleteProduct(ctx, id)
+}
