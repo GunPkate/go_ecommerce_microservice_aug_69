@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -13,7 +14,7 @@ type Database struct {
 func NewDatabase() (*Database, error) {
 	db, err := sqlx.Open(
 		"mysql",
-		"GP:GP@tcp(localhost:3406)/go_ecommerce_aug69?parseTime=true",
+		"root:gp01@tcp(localhost:3406)/ecommerce?parseTime=true",
 	)
 	if err != nil {
 		return nil, fmt.Errorf("error database: %v", err)
